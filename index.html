@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>The Great Crossing</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@500;600&family=Lora:ital@0;1&display=swap"
+    />
+    <style>
+      :root {
+        --teal: #243f42;
+        --sage: #668779;
+        --sand: #d5c5a2;
+        --parch: #f2e9d8;
+        --terra: #a96e50;
+        --walnut: #493b35;
+        --bg: #1b3033;
+        --bg2: #335558;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0e1a1c;
+          --bg2: #1d3336;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0e1a1c;
+        --bg2: #1d3336;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        background: radial-gradient(circle at 50% 0, var(--bg2), var(--bg));
+        color: var(--walnut);
+        font:
+          16px/1.55 Lora,
+          Georgia,
+          serif;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        margin: 0;
+        line-height: 1.05;
+        font-weight: 700;
+      }
+      button {
+        font:
+          600 15px "DM Sans",
+          system-ui,
+          sans-serif;
+        cursor: pointer;
+        color: inherit;
+      }
+      small {
+        font-family: "DM Sans", system-ui, sans-serif;
+        font-size: 12.5px;
+      }
+      .plaque {
+        background: linear-gradient(160deg, #f6eddb, #e3d2ab);
+        border: 2px solid #8a6a47;
+        border-radius: 18px 10px 16px 12px;
+        box-shadow:
+          inset 0 0 0 3px rgba(255, 255, 255, 0.35),
+          0 6px 18px rgba(0, 0, 0, 0.35);
+        padding: 12px 18px;
+        color: var(--walnut);
+      }
+      .btn {
+        background: var(--teal);
+        color: var(--parch);
+        border: 2px solid #12272a;
+        border-radius: 12px;
+        padding: 12px 22px;
+        box-shadow: 0 3px 0 #0b1a1c;
+      }
+      .btn:hover:not(:disabled) {
+        filter: brightness(1.25);
+      }
+      .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .btn.alt {
+        background: var(--walnut);
+        border-color: #2b211d;
+      }
+      .round {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: radial-gradient(#6d5242, var(--walnut));
+        border: 2px solid #d9b97f;
+        color: var(--parch);
+        font-size: 18px;
+        display: inline-grid;
+        place-items: center;
+        padding: 0;
+      }
+      button:hover > .round,
+      button.round:hover {
+        filter: brightness(1.25);
+      }
+      :focus-visible {
+        outline: 3px solid #ffd98a;
+        outline-offset: 2px;
+      }
+      .scr {
+        display: none;
+        min-height: 100vh;
+      }
+      .scr.on {
+        display: block;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 12px;
+      }
+      #menu.on {
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #menu svg.full {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .mbox {
+        position: relative;
+        text-align: center;
+        padding: 28px 34px;
+        width: min(92vw, 460px);
+      }
+      .mbox h1 {
+        font-size: clamp(46px, 9vw, 72px);
+      }
+      .mbox p {
+        font-style: italic;
+        margin: 8px 0 20px;
+      }
+      .mbox .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 17px;
+      }
+      .top {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .ttl h2 {
+        font-size: clamp(30px, 5vw, 46px);
+      }
+      .ttl em {
+        font-size: 14px;
+      }
+      .hud {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .hud div {
+        text-align: center;
+        min-width: 48px;
+      }
+      .hud small {
+        display: block;
+      }
+      .hud b {
+        font:
+          700 22px "Cormorant Garamond",
+          serif;
+      }
+      .msg {
+        margin: 12px auto;
+        text-align: center;
+        font-style: italic;
+        max-width: 760px;
+        padding: 10px 16px;
+      }
+      .msg.err {
+        background: #f1d3c5;
+        border-color: #a14a2d;
+        color: #7a2d16;
+      }
+      .msg.ok {
+        background: #dfe8d3;
+        border-color: #668779;
+      }
+      #sc {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        border: 3px solid #8a6a47;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        background: #a9cfd0;
+      }
+      .c {
+        cursor: pointer;
+        transition: transform 0.5s ease;
+      }
+      .c use {
+        animation: br 3.2s ease-in-out var(--d, 0s) infinite;
+      }
+      .c:hover use {
+        filter: brightness(1.12);
+      }
+      .c:focus-visible {
+        outline: none;
+      }
+      .c:focus-visible use {
+        filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #ffd98a);
+      }
+      .cross .c.in,
+      .cross #boat {
+        transition: transform 1.3s ease-in-out;
+      }
+      #boat {
+        transition: transform 1.3s ease-in-out;
+      }
+      .bob {
+        animation: bob 3s ease-in-out infinite;
+      }
+      .wv path {
+        animation: fl 6s linear infinite;
+      }
+      @keyframes br {
+        50% {
+          transform: scaleY(1.025);
+        }
+      }
+      @keyframes bob {
+        50% {
+          transform: translateY(3px);
+        }
+      }
+      @keyframes fl {
+        to {
+          stroke-dashoffset: -160;
+        }
+      }
+      @keyframes sh {
+        25% {
+          transform: translateX(-7px);
+        }
+        75% {
+          transform: translateX(7px);
+        }
+      }
+      .shake {
+        animation: sh 0.4s;
+      }
+      .calm * {
+        transition-duration: 0s !important;
+        animation: none !important;
+      }
+      .panel {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 12px;
+      }
+      #chips {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 6px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        width: 52px;
+        height: 60px;
+        border-radius: 10px;
+        border: 2px solid #8a6a47;
+        background: #efe2c4;
+        padding: 0;
+      }
+      .chip svg {
+        width: 100%;
+        height: 100%;
+      }
+      .chip.on {
+        background: var(--terra);
+        border-color: var(--walnut);
+        transform: translateY(-3px);
+      }
+      .chip:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .dv {
+        width: 2px;
+        height: 48px;
+        background: #8a6a47;
+        opacity: 0.5;
+        margin: 0 4px;
+      }
+      .capc {
+        text-align: center;
+        border: 2px dashed #8a6a47;
+        border-radius: 12px;
+        padding: 8px 16px;
+      }
+      .capc b {
+        display: block;
+        font:
+          700 28px "Cormorant Garamond",
+          serif;
+      }
+      .ctl {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .tools {
+        display: flex;
+        gap: 10px;
+      }
+      .tl {
+        background: none;
+        border: 0;
+        display: grid;
+        justify-items: center;
+        gap: 2px;
+        padding: 2px;
+      }
+      #modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 18, 20, 0.7);
+        place-items: center;
+        z-index: 9;
+        padding: 16px;
+        overflow: auto;
+      }
+      #modal.on {
+        display: flex;
+      }
+      .box {
+        width: min(92vw, 520px);
+        margin: auto;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .box h2 {
+        font-size: 40px;
+      }
+      .box ol {
+        text-align: left;
+        padding-left: 26px;
+      }
+      .stars {
+        font-size: 46px;
+        color: #a8977a;
+        letter-spacing: 6px;
+      }
+      .stars .on {
+        color: #c9892c;
+        display: inline-block;
+        animation: pop 0.6s both;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0) rotate(-90deg);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      .conf {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .conf i {
+        position: absolute;
+        top: -10px;
+        width: 8px;
+        height: 12px;
+        animation: fall 2.6s linear infinite;
+      }
+      .x {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 2px solid #8a6a47;
+        background: #efe2c4;
+        color: var(--walnut);
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+        z-index: 2;
+      }
+      .x:hover {
+        background: var(--terra);
+        color: var(--parch);
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(560px) rotate(540deg);
+        }
+      }
+      .pg {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 14px;
+        color: var(--parch);
+      }
+      .pg h1 {
+        font-size: clamp(38px, 7vw, 56px);
+        margin: 10px 0 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 14px;
+      }
+      .card {
+        text-align: left;
+        display: grid;
+        gap: 4px;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+      }
+      .card h3 {
+        font-size: 28px;
+      }
+      .card p {
+        margin: 0;
+      }
+      .card .stars {
+        font-size: 22px;
+        letter-spacing: 2px;
+      }
+      .orow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid #b99f74;
+      }
+      .ill {
+        margin: 12px 0;
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .ill svg {
+        background: #e8d9b6;
+        border-radius: 10px;
+        padding: 6px;
+      }
+      .pg .plaque {
+        text-align: center;
+      }
+      .pg .plaque p {
+        max-width: 60ch;
+        margin: 10px auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .c use,
+        .bob,
+        .wv path {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <g id="mi">
+          <path
+            d="M-12 -2L-9 -36Q0 -42 9 -36L12 -2Z"
+            fill="#f6efe0"
+            stroke="#493B35"
+            stroke-width="1.6"
+          />
+          <rect x="-10.5" y="-20" width="21" height="3.5" fill="#A96E50" />
+          <path d="M0 -34v9M-3.5 -31h7" stroke="#493B35" stroke-width="1.6" />
+          <circle
+            cy="-47"
+            r="9.5"
+            fill="var(--sk)"
+            stroke="#493B35"
+            stroke-width="1.4"
+          />
+          <path
+            d="M-9.5 -48a9.5 9.5 0 0 1 19 0q-9.5 -5 -19 0z"
+            fill="var(--h)"
+          />
+          <circle cx="-3.5" cy="-46" r="1.2" fill="#493B35" />
+          <circle cx="3.5" cy="-46" r="1.2" fill="#493B35" />
+          <path
+            d="M-3 -42q3 2.5 6 0"
+            stroke="#493B35"
+            fill="none"
+            stroke-width="1.2"
+          />
+        </g>
+        <g id="ca">
+          <path
+            d="M-13 -2L-10 -36Q0 -41 10 -36L13 -2L9 -6L5 -1L0 -6L-5 -1L-9 -6Z"
+            fill="#8a5a3c"
+            stroke="#493B35"
+            stroke-width="1.6"
+          />
+          <path
+            d="M-10 -30L-16 -15M10 -30L16 -15"
+            stroke="var(--sk)"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
+          <circle
+            cy="-47"
+            r="9.5"
+            fill="var(--sk)"
+            stroke="#493B35"
+            stroke-width="1.4"
+          />
+          <path
+            d="M-10 -48a10 10 0 0 1 20 0q-4 -2 -6 -4q-4 3 -8 1q-3 1 -6 3z"
+            fill="var(--h)"
+          />
+          <path d="M-9 -45q9 22 18 0q-3 6 -9 7q-6 -1 -9 -7z" fill="var(--h)" />
+          <circle cx="-3.5" cy="-48" r="1.2" fill="#493B35" />
+          <circle cx="3.5" cy="-48" r="1.2" fill="#493B35" />
+        </g>
+      </defs>
+    </svg>
+
+    <section id="menu" class="scr on">
+      <svg
+        class="full"
+        id="bgm"
+        viewBox="0 0 1000 560"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      ></svg>
+      <div class="plaque mbox">
+        <svg
+          width="46"
+          height="46"
+          viewBox="-24 -24 48 48"
+          style="position: absolute; right: 10px; top: -14px"
+          aria-hidden="true"
+        >
+          <circle r="21" fill="#e3d2ab" stroke="#A96E50" stroke-width="3" />
+          <path d="M0 -20L5 0L0 20L-5 0ZM-20 0L0 -5L20 0L0 5Z" fill="#A96E50" />
+        </svg>
+        <h1>The Great Crossing</h1>
+        <p>One river. Six travellers. One boat.</p>
+        <button class="btn" data-a="classic">Play Classic</button
+        ><button class="btn alt" data-a="levels">Challenge Mode</button
+        ><button class="btn alt" data-a="how">How to Play</button
+        ><button class="btn alt" data-a="opts">Settings</button>
+      </div>
+    </section>
+
+    <section id="levels" class="scr">
+      <div class="pg">
+        <button class="btn alt" data-a="back">Back</button>
+        <h1>Challenge Mode</h1>
+        <div class="grid" id="lg"></div>
+      </div>
+    </section>
+    <section id="how" class="scr">
+      <div class="pg">
+        <button class="btn alt" data-a="back">Back</button>
+        <h1>How to Play</h1>
+        <div class="plaque" id="hw"></div>
+      </div>
+    </section>
+    <section id="opts" class="scr">
+      <div class="pg">
+        <button class="btn alt" data-a="back">Back</button>
+        <h1>Settings</h1>
+        <div class="plaque" style="text-align: left">
+          <div id="ol"></div>
+          <div class="orow">
+            <span>Erase all best scores</span
+            ><button class="btn alt" id="rsb" data-a="reset">Erase</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="scr">
+      <div class="wrap">
+        <div class="top">
+          <div class="plaque ttl">
+            <h2>The Great Crossing</h2>
+            <em id="tag"></em><br /><small id="lvn"></small>
+          </div>
+          <div class="plaque hud">
+            <div><small>Moves</small><b id="mv">0</b></div>
+            <div><small>Best</small><b id="bs">--</b></div>
+            <div><small>Time</small><b id="tm">0:00</b></div>
+            <button class="round" data-a="menu" aria-label="Main menu">
+              ☰</button
+            ><button class="round" data-a="how" aria-label="How to play">
+              ?</button
+            ><button class="round" data-a="opts" aria-label="Settings">⚙</button
+            ><button class="round" data-a="pause" aria-label="Pause">❚❚</button>
+          </div>
+        </div>
+        <div class="plaque msg" id="msg" role="status" aria-live="polite"></div>
+        <svg
+          id="sc"
+          viewBox="0 0 1000 560"
+          role="group"
+          aria-label="River with two banks and a boat"
+        ></svg>
+        <div class="plaque panel">
+          <div>
+            <b>Select passengers: <small id="cap"></small></b>
+            <div id="chips"></div>
+          </div>
+          <div class="capc"><small>Boat capacity</small><b id="kc"></b></div>
+          <div class="ctl">
+            <button class="btn" id="go" data-a="cross">Cross River</button>
+            <div class="tools">
+              <button class="tl" data-a="hint">
+                <span class="round">✧</span><small>Hint</small></button
+              ><button class="tl" data-a="undo">
+                <span class="round">↶</span><small>Undo</small></button
+              ><button class="tl" data-a="restart">
+                <span class="round">↻</span><small>Restart</small></button
+              ><button class="tl" data-a="sol">
+                <span class="round">❦</span><small>Solution</small>
+              </button>
+            </div>
+          </div>
+        </div>
+        <small
+          style="
+            color: #cfd8d0;
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+          "
+          >Keys: U undo · R restart · H hint · S solution · P pause · Enter
+          cross</small
+        >
+      </div>
+    </section>
+    <div id="modal" role="dialog" aria-modal="true">
+      <div class="plaque box" id="mb"></div>
+    </div>
+
+    <script>
+      const $ = (s) => document.querySelector(s),
+        $$ = (s) => [...document.querySelectorAll(s)],
+        ok = (m, c) => m == 0 || m >= c,
+        pl = (n, a, b) => (n == 1 ? a : b);
+      const LV = [
+        {
+          n: "First Steps",
+          m: 2,
+          c: 2,
+          k: 2,
+          d: "A gentle warm-up with two of each.",
+        },
+        {
+          n: "The Great Crossing",
+          m: 3,
+          c: 3,
+          k: 2,
+          d: "The classic puzzle. Three missionaries, three cannibals, a two-seat boat.",
+        },
+        {
+          n: "Bigger Boat",
+          m: 4,
+          c: 4,
+          k: 3,
+          d: "More travellers, a roomier boat.",
+        },
+        {
+          n: "The Long Queue",
+          m: 5,
+          c: 5,
+          k: 3,
+          d: "Five and five. Plan several crossings ahead.",
+        },
+        {
+          n: "Grand Expedition",
+          m: 6,
+          c: 6,
+          k: 4,
+          d: "Twelve travellers and a mighty ferry.",
+        },
+      ];
+      const HAIR = [
+          "#3b2a20",
+          "#7a4a2a",
+          "#c8a15a",
+          "#22201f",
+          "#8c3b24",
+          "#d8d0b8",
+        ],
+        SKIN = [
+          "#f0c8a0",
+          "#e0ae80",
+          "#c98d62",
+          "#f3d2b3",
+          "#b07a52",
+          "#e8b98f",
+        ];
+      let O = { sound: 1, anim: 1 };
+      try {
+        Object.assign(O, JSON.parse(localStorage.getItem("gc.o") || "{}"));
+      } catch (e) {}
+      const g = (k) => {
+          try {
+            return localStorage.getItem(k);
+          } catch (e) {
+            return null;
+          }
+        },
+        st = (k, v) => {
+          try {
+            localStorage.setItem(k, v);
+          } catch (e) {}
+        };
+      let ac;
+      function beep(f, d = 0.12, t = 0) {
+        if (!O.sound) return;
+        try {
+          ac = ac || new AudioContext();
+          const o = ac.createOscillator(),
+            v = ac.createGain(),
+            s = ac.currentTime + t;
+          o.type = "triangle";
+          o.frequency.value = f;
+          o.connect(v);
+          v.connect(ac.destination);
+          v.gain.setValueAtTime(0.08, s);
+          v.gain.exponentialRampToValueAtTime(0.001, s + d);
+          o.start(s);
+          o.stop(s + d);
+        } catch (e) {}
+      }
+      /* ---- engine ---- */
+      function solve(M, C, cap, m, c, s) {
+        const k = (a, b, z) => a + "," + b + "," + z,
+          q = [[m, c, s]],
+          p = { [k(m, c, s)]: null };
+        for (let i = 0; i < q.length; i++) {
+          const [x, y, z] = q[i];
+          if (!x && !y && z == 1) {
+            const r = [];
+            let u = k(x, y, z);
+            while (p[u]) {
+              r.unshift(p[u].mv);
+              u = p[u].f;
+            }
+            return r;
+          }
+          const am = z ? M - x : x,
+            ac2 = z ? C - y : y;
+          for (let dm = 0; dm <= Math.min(am, cap); dm++)
+            for (let dc = 0; dc <= Math.min(ac2, cap - dm); dc++) {
+              if (dm + dc < 1) continue;
+              const nx = z ? x + dm : x - dm,
+                ny = z ? y + dc : y - dc;
+              if (!ok(nx, ny) || !ok(M - nx, C - ny)) continue;
+              const nk = k(nx, ny, 1 - z);
+              if (nk in p) continue;
+              p[nk] = { f: k(x, y, z), mv: [dm, dc] };
+              q.push([nx, ny, 1 - z]);
+            }
+        }
+        return null;
+      }
+      const opt = (i) =>
+        solve(LV[i].m, LV[i].c, LV[i].k, LV[i].m, LV[i].c, 0).length;
+      const desc = ([a, b]) =>
+        [
+          a && `${a} ${pl(a, "missionary", "missionaries")}`,
+          b && `${b} ${pl(b, "cannibal", "cannibals")}`,
+        ]
+          .filter(Boolean)
+          .join(" + ");
+      const sol = () => {
+        const L = LV[S.lv];
+        return solve(
+          L.m,
+          L.c,
+          L.k,
+          S.loc.filter((s, i) => s == "L" && i < L.m).length,
+          S.loc.filter((s, i) => s == "L" && i >= L.m).length,
+          S.boat == "L" ? 0 : 1,
+        );
+      };
+      /* ---- art ---- */
+      const tree = (x, y, s, c) =>
+        `<g transform="translate(${x} ${y}) scale(${s})"><rect x="-4" y="-30" width="8" height="30" fill="#5a4636"/><circle cy="-48" r="26" fill="${c}"/><circle cx="-16" cy="-36" r="18" fill="${c}"/><circle cx="17" cy="-38" r="19" fill="#668779" opacity=".85"/></g>`;
+      const wave = (x, y) => `<path d="M${x} ${y}q40 -8 80 0t80 0" />`;
+      const scenery = (
+        p,
+      ) => `<defs><linearGradient id="${p}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9cfd0"/><stop offset="1" stop-color="#f2e9d8"/></linearGradient><linearGradient id="${p}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78b0c0"/><stop offset="1" stop-color="#2d6376"/></linearGradient></defs>
+<rect width="1000" height="560" fill="url(#${p}s)"/><circle cx="820" cy="90" r="34" fill="#fff6d8" opacity=".9"/>
+<path d="M0 300L120 190L230 270L340 170L470 280L560 220L700 290L820 180L930 260L1000 220V400H0Z" fill="#8fa3b0"/>
+<path d="M0 330Q200 250 380 320T700 310T1000 300V420H0Z" fill="#7f9b86"/>
+<g transform="translate(500 305)" fill="#6c7490"><rect x="-22" y="-30" width="44" height="30"/><rect x="-30" y="-52" width="12" height="52"/><rect x="18" y="-46" width="12" height="46"/><path d="M-32 -52l8 -16l8 16zM16 -46l8 -14l8 14z" fill="#A96E50"/></g>
+<path d="M0 250L120 240L200 330L170 400H0Z" fill="#b8897a"/><path d="M1000 230L880 250L800 330L840 400H1000Z" fill="#b8897a"/>
+${tree(60, 352, 1, "#4f7a58") + tree(150, 342, 0.9, "#668779") + tree(245, 352, 0.8, "#4f7a58") + tree(945, 352, 1, "#4f7a58") + tree(860, 344, 0.9, "#668779") + tree(775, 354, 0.8, "#4f7a58") + tree(420, 330, 0.5, "#668779") + tree(590, 332, 0.45, "#4f7a58")}
+<path d="M300 385Q500 372 700 385L760 560H240Z" fill="url(#${p}w)"/>
+<g class="wv" fill="none" stroke="#fff" opacity=".5" stroke-width="2" stroke-linecap="round" stroke-dasharray="30 50">${wave(330, 420) + wave(520, 420) + wave(380, 520) + wave(540, 505) + wave(450, 470)}</g>
+<path d="M0 352Q150 346 305 392Q335 408 300 435Q250 480 262 560H0Z" fill="#7d9a62" stroke="#D5C5A2" stroke-width="6"/><path d="M1000 352Q850 346 695 392Q665 408 700 435Q750 480 738 560H1000Z" fill="#7d9a62" stroke="#D5C5A2" stroke-width="6"/>
+<ellipse cx="300" cy="500" rx="40" ry="22" fill="#8b7d74"/><ellipse cx="250" cy="520" rx="30" ry="16" fill="#a09286"/><ellipse cx="710" cy="505" rx="38" ry="20" fill="#8b7d74"/><ellipse cx="760" cy="525" rx="28" ry="15" fill="#a09286"/>
+<g font-family="Lora,serif" font-size="17" text-anchor="middle" fill="#493B35"><g transform="translate(40 478)"><rect width="120" height="34" rx="5" fill="#c89a62" stroke="#493B35" stroke-width="2"/><text x="60" y="23">Left Bank</text></g><g transform="translate(840 478)"><rect width="120" height="34" rx="5" fill="#c89a62" stroke="#493B35" stroke-width="2"/><text x="60" y="23">Right Bank</text></g></g>`;
+      const hull = `<g class="bob"><path d="M0 0H170Q160 38 128 42H42Q10 38 0 0Z" fill="#8a5a3c" stroke="#493B35" stroke-width="3"/><path d="M12 14H158M22 27H148" stroke="#493B35" stroke-width="1.5" opacity=".5"/><rect x="40" y="-3" width="90" height="5" fill="#a97b52"/></g>`;
+      $("#bgm").innerHTML =
+        scenery("a") + `<g transform="translate(415 440)">${hull}</g>`;
+      $("#sc").innerHTML =
+        scenery("b") + `<g id="boat">${hull}</g><g id="chs"></g>`;
+      /* ---- state ---- */
+      let cur = "menu",
+        prev = "menu",
+        S = null,
+        rs = 0,
+        hv = 0;
+      function show(n) {
+        prev = cur;
+        cur = n;
+        $$(".scr").forEach((s) => s.classList.toggle("on", s.id == n));
+        scrollTo(0, 0);
+        if (n == "levels") lvls();
+        if (n == "opts") opts();
+        if (n == "how") how();
+      }
+      function play(i) {
+        const L = LV[i],
+          ns = "http://www.w3.org/2000/svg";
+        S = {
+          lv: i,
+          loc: Array(L.m + L.c).fill("L"),
+          sel: [],
+          boat: "L",
+          bx: "L",
+          hist: [],
+          busy: 0,
+          paused: 0,
+          done: 0,
+          el: 0,
+          hint: 0,
+          used: 0,
+          els: [],
+        };
+        const cn = $("#chs");
+        cn.innerHTML = "";
+        S.loc.forEach((_, k) => {
+          const m = k < L.m,
+            j = m ? k : k - L.m,
+            e = document.createElementNS(ns, "g");
+          e.setAttribute("class", "c");
+          e.setAttribute("tabindex", "0");
+          e.setAttribute("role", "button");
+          e.setAttribute(
+            "aria-label",
+            (m ? "Missionary " : "Cannibal ") + (j + 1),
+          );
+          e.style.setProperty(
+            "--h",
+            (m ? HAIR : HAIR.slice().reverse())[j % 6],
+          );
+          e.style.setProperty("--sk", SKIN[(j * 2 + (m ? 0 : 1)) % 6]);
+          e.style.setProperty("--d", -k * 0.4 + "s");
+          e.innerHTML = `<ellipse rx="13" ry="3" fill="#000" opacity=".2"/><use href="#${m ? "mi" : "ca"}"/>`;
+          e.onclick = () => tg(k);
+          e.onkeydown = (v) => {
+            if (v.key == "Enter" || v.key == " ") {
+              v.preventDefault();
+              tg(k);
+            }
+          };
+          cn.append(e);
+          S.els.push(e);
+        });
+        $("#tag").textContent = `One river. ${L.m + L.c} travellers. One boat.`;
+        $("#lvn").textContent = `Level ${i + 1}: ${L.n}`;
+        $("#kc").textContent = L.k;
+        closeM();
+        show("game");
+        say(
+          "Get everyone safely to the other side, without leaving missionaries outnumbered!",
+        );
+        render();
+        hud();
+      }
+      function pos(i) {
+        if (S.sel.includes(i))
+          return [(S.bx == "L" ? 335 : 495) + 26 + S.sel.indexOf(i) * 34, 452];
+        const sd = S.loc[i],
+          ls = S.loc
+            .map((s, j) => (s == sd && !S.sel.includes(j) ? j : -1))
+            .filter((j) => j >= 0),
+          k = ls.indexOf(i);
+        return [
+          sd == "L" ? 40 + (k % 6) * 46 : 960 - (k % 6) * 46,
+          395 + Math.floor(k / 6) * 40,
+        ];
+      }
+      function render() {
+        const L = LV[S.lv];
+        S.loc.forEach((_, i) => {
+          const e = S.els[i],
+            [x, y] = pos(i);
+          e.style.transform = `translate(${x}px,${y}px)`;
+          e.classList.toggle("in", S.sel.includes(i));
+        });
+        $("#boat").style.transform =
+          `translate(${S.bx == "L" ? 335 : 495}px,440px)`;
+        $("#cap").textContent = `(${S.sel.length}/${L.k} on board)`;
+        $("#chips").innerHTML = S.loc
+          .map((s, i) => {
+            const m = i < L.m,
+              j = m ? i : i - L.m,
+              on = S.sel.includes(i),
+              dis = !on && s != S.boat;
+            return (
+              (i == L.m ? '<i class="dv"></i>' : "") +
+              `<button class="chip ${on ? "on" : ""}" data-a="tg" data-v="${i}" ${dis ? "disabled" : ""} aria-pressed="${on}" aria-label="${m ? "Missionary" : "Cannibal"} ${j + 1}"><svg viewBox="-16 -62 32 40" style="--h:${(m ? HAIR : HAIR.slice().reverse())[j % 6]};--sk:${SKIN[(j * 2 + (m ? 0 : 1)) % 6]}"><use href="#${m ? "mi" : "ca"}"/></svg></button>`
+            );
+          })
+          .join("");
+        $("#go").disabled = !!(S.busy || S.done);
+      }
+      function hud() {
+        $("#mv").textContent = S.hist.length;
+        $("#bs").textContent = g("gc.b" + S.lv) || "--";
+        $("#tm").textContent = tm();
+      }
+      const tm = () =>
+        Math.floor(S.el / 60) + ":" + String(S.el % 60).padStart(2, "0");
+      function say(t, k, sh) {
+        const m = $("#msg");
+        m.textContent = t;
+        m.className = "plaque msg " + (k || "");
+        if (sh) {
+          const s = $("#sc");
+          s.classList.remove("shake");
+          void s.getBoundingClientRect();
+          s.classList.add("shake");
+        }
+      }
+      function tg(i) {
+        if (S.busy || S.paused || S.done) return;
+        const K = LV[S.lv].k;
+        if (S.sel.includes(i)) S.sel = S.sel.filter((x) => x != i);
+        else if (S.loc[i] != S.boat)
+          return say(
+            `The boat is at the ${S.boat == "L" ? "left" : "right"} bank. That traveller is on the other side.`,
+            "err",
+          );
+        else if (S.sel.length >= K)
+          return say(`The boat holds only ${K} passengers.`, "err");
+        else S.sel.push(i);
+        beep(520);
+        S.hint = 0;
+        say(
+          S.sel.length
+            ? "Ready when you are. Press Cross River."
+            : "Choose who rides the boat.",
+        );
+        render();
+      }
+      function cross() {
+        if (S.busy || S.paused || S.done) return;
+        if (!S.sel.length) {
+          beep(160);
+          return say(
+            "The boat can't cross empty. Choose at least one passenger.",
+            "err",
+            1,
+          );
+        }
+        const d = S.boat == "L" ? "R" : "L",
+          L = LV[S.lv],
+          nl = S.loc.slice();
+        S.sel.forEach((i) => (nl[i] = d));
+        for (const b of ["L", "R"]) {
+          const m = nl.filter((s, i) => s == b && i < L.m).length,
+            c = nl.filter((s, i) => s == b && i >= L.m).length;
+          if (!ok(m, c)) {
+            beep(150, 0.3);
+            return say(
+              `Not safe. The ${b == "L" ? "left" : "right"} bank would have ${m} ${pl(m, "missionary", "missionaries")} outnumbered by ${c} ${pl(c, "cannibal", "cannibals")}. Change your passengers and try again.`,
+              "err",
+              1,
+            );
+          }
+        }
+        S.busy = 1;
+        S.hist.push({ loc: S.loc.slice(), boat: S.boat });
+        S.bx = d;
+        $("#sc").classList.add("cross");
+        beep(330, 0.3);
+        say("Crossing the river...");
+        render();
+        hud();
+        setTimeout(
+          () => {
+            S.loc = nl;
+            S.boat = d;
+            S.sel = [];
+            S.busy = 0;
+            S.hint = 0;
+            $("#sc").classList.remove("cross");
+            if (S.loc.every((s) => s == "R")) return win();
+            say("Safe crossing! Choose the next passengers.", "ok");
+            render();
+            hud();
+          },
+          O.anim ? 1350 : 50,
+        );
+      }
+      function win() {
+        S.done = 1;
+        const o = opt(S.lv),
+          n = S.hist.length;
+        let rec = 0;
+        if (!S.used) {
+          const b = +g("gc.b" + S.lv);
+          if (!b || n < b) {
+            st("gc.b" + S.lv, n);
+            rec = 1;
+          }
+        }
+        hud();
+        render();
+        beep(523, 0.15);
+        beep(659, 0.15, 0.15);
+        beep(784, 0.35, 0.3);
+        const s = n == o ? 3 : n <= o + 2 ? 2 : 1,
+          C = ["#A96E50", "#668779", "#D5C5A2", "#243F42"];
+        modal(
+          `<div class="conf" aria-hidden="true">${Array.from({ length: 26 }, (_, i) => `<i style="left:${Math.random() * 100}%;background:${C[i % 4]};animation-delay:${Math.random() * 2}s"></i>`).join("")}</div><h2>${s == 3 ? "A flawless crossing!" : "Everyone made it!"}</h2><div class="stars" aria-label="${s} of 3 stars">${[1, 2, 3].map((k) => `<span class="${k <= s ? "on" : ""}" style="animation-delay:${k * 0.25}s">★</span>`).join("")}</div><p>Solved in <b>${n}</b> crossings (fewest possible: ${o}) in ${tm()}.${rec ? " New best score!" : ""}${S.used ? " The solution guide was used, so this score is not saved." : ""}</p><div class="row">${S.lv < LV.length - 1 ? '<button class="btn" data-a="next">Next level</button>' : ""}<button class="btn alt" data-a="restart">Play again</button><button class="btn alt" data-a="levels">All levels</button></div>`,
+          1,
+        );
+      }
+      function modal(h, keep) {
+        $("#mb").innerHTML =
+          '<button class="x" data-a="close" aria-label="Close">✕</button>' + h;
+        $("#modal").classList.add("on");
+        const b = $("#mb .btn");
+        b && b.focus();
+      }
+      function closeM() {
+        $("#modal").classList.remove("on");
+        if (S) S.paused = 0;
+      }
+      /* ---- screens ---- */
+      function lvls() {
+        $("#lg").innerHTML = LV.map((l, i) => {
+          const o = opt(i),
+            b = +g("gc.b" + i),
+            s = b ? (b == o ? 3 : b <= o + 2 ? 2 : 1) : 0;
+          return `<button class="plaque card" data-a="play" data-v="${i}"><h3>${i + 1}. ${l.n}</h3><p>${l.d}</p><small>${l.m} missionaries, ${l.c} cannibals, boat holds ${l.k}</small><small>Fewest crossings: ${o}. Your best: ${b || "none yet"}</small><span class="stars" aria-label="${s} of 3 stars">${"★".repeat(s)}${"☆".repeat(3 - s)}</span></button>`;
+        }).join("");
+      }
+      function ill(m, c) {
+        return `<svg viewBox="0 0 ${(m + c) * 34 + 8} 70" height="70" aria-hidden="true">${Array.from({ length: m + c }, (_, i) => `<use href="#${i < m ? "mi" : "ca"}" transform="translate(${20 + i * 34} 64)" style="--h:${HAIR[i % 6]};--sk:${SKIN[i % 6]}"/>`).join("")}</svg>`;
+      }
+      const SL = [
+        [
+          "The goal",
+          "Carry every missionary and every cannibal from the left bank to the right bank. You have one boat and a river between you.",
+          ill(3, 3),
+        ],
+        [
+          "Boarding the boat",
+          "Tap a traveller, or a portrait in the panel, on the bank where the boat is waiting. Tap again to step off. The boat has a limited number of seats and can never cross empty.",
+          ill(1, 1),
+        ],
+        [
+          "The golden rule",
+          "On any bank with missionaries, cannibals must never outnumber them. A bank with no missionaries is fine. The rule applies to both banks after every crossing, and an unsafe move is refused so you can try again.",
+          `<div><small>Safe: 2 missionaries, 1 cannibal</small><br>${ill(2, 1)}</div><div><small>Unsafe: 1 missionary, 2 cannibals</small><br>${ill(1, 2)}</div>`,
+        ],
+        [
+          "Your tools",
+          "Hint gives a small nudge, and a second tap adds detail. Undo reverses the last crossing, Restart starts the level again, and Solution shows a safe route and can play it for you. Pause freezes the clock.",
+          "",
+        ],
+        [
+          "Winning",
+          "Get everyone across. Fewer crossings earn more stars, and your best score is remembered. Challenge Mode adds bigger parties and boats.",
+          '<span class="stars" style="font-size:40px">★★★</span>',
+        ],
+      ];
+      function how() {
+        const s = SL[hv];
+        $("#hw").innerHTML =
+          `<h2>${s[0]}</h2><p>${s[1]}</p><div class="ill">${s[2]}</div><div class="row"><button class="btn alt" data-a="hp" ${hv ? "" : "disabled"}>Previous</button><small>${hv + 1} of ${SL.length}</small>${hv < SL.length - 1 ? '<button class="btn" data-a="hn">Next</button>' : '<button class="btn" data-a="play" data-v="0">Try a practice puzzle</button>'}</div>`;
+      }
+      function opts() {
+        $("#ol").innerHTML = [
+          ["sound", "Sound effects"],
+          ["anim", "Animations and moving water"],
+        ]
+          .map(
+            ([k, t]) =>
+              `<div class="orow"><span>${t}</span><button class="btn alt" role="switch" aria-checked="${!!O[k]}" data-a="tg2" data-v="${k}">${O[k] ? "On" : "Off"}</button></div>`,
+          )
+          .join("");
+        $("#rsb").textContent = "Erase";
+      }
+      const applyO = () => document.body.classList.toggle("calm", !O.anim);
+      applyO();
+      /* ---- actions ---- */
+      const A = {
+        classic: () => play(1),
+        levels: () => {
+          closeM();
+          show("levels");
+        },
+        how: () => {
+          hv = 0;
+          show("how");
+        },
+        opts: () => show("opts"),
+        menu: () => show("menu"),
+        back: () => show(prev == cur ? "menu" : prev),
+        play: (v) => play(+v),
+        next: () => play(S.lv + 1),
+        restart: () => play(S ? S.lv : 1),
+        tg: (v) => tg(+v),
+        cross,
+        hp: () => {
+          hv--;
+          how();
+        },
+        hn: () => {
+          hv++;
+          how();
+        },
+        close: closeM,
+        tg2: (k) => {
+          O[k] = O[k] ? 0 : 1;
+          st("gc.o", JSON.stringify(O));
+          applyO();
+          opts();
+        },
+        reset: () => {
+          if (!rs) {
+            rs = 1;
+            $("#rsb").textContent = "Tap again to confirm";
+            return;
+          }
+          rs = 0;
+          LV.forEach((_, i) => {
+            try {
+              localStorage.removeItem("gc.b" + i);
+            } catch (e) {}
+          });
+          $("#rsb").textContent = "Scores erased";
+        },
+        undo: () => {
+          if (!S || S.busy || S.paused || S.done) return;
+          if (!S.hist.length) return say("Nothing to undo yet.", "err");
+          const h = S.hist.pop();
+          S.loc = h.loc;
+          S.boat = S.bx = h.boat;
+          S.sel = [];
+          S.hint = 0;
+          beep(260);
+          say("Last crossing undone.");
+          render();
+          hud();
+        },
+        hint: () => {
+          if (!S || S.busy || S.paused || S.done) return;
+          const s = sol();
+          if (!s)
+            return say("No safe route from here. Try Undo or Restart.", "err");
+          const [a, b] = s[0],
+            d = S.boat == "L" ? "right" : "left";
+          say(
+            S.hint
+              ? `Hint: that means ${desc([a, b])}.`
+              : `Hint: send ${a + b} ${pl(a + b, "traveller", "travellers")} to the ${d} bank next.`,
+          );
+          S.hint = 1 - S.hint;
+          beep(660);
+        },
+        sol: () => {
+          if (!S || S.busy || S.done) return;
+          const s = sol();
+          S.paused = 1;
+          modal(
+            `<h2>Solution guide</h2><p>${s ? `A safe route from where you stand: ${s.length} crossings.` : "No safe route from here. Undo or restart."}</p><ol>${(s || []).map((m, i) => `<li>Send ${desc(m)} ${(S.boat == "L") == (i % 2 == 0) ? "across to the right" : "back to the left"}.</li>`).join("")}</ol><div class="row">${s ? '<button class="btn" data-a="step">Play next step</button>' : ""}<button class="btn alt" data-a="close">Close</button></div>`,
+          );
+        },
+        step: () => {
+          closeM();
+          if (S.busy || S.done) return;
+          const s = sol();
+          if (!s) return;
+          S.used = 1;
+          let [a, b] = s[0];
+          const L = LV[S.lv];
+          S.sel = [];
+          S.loc.forEach((l, i) => {
+            if (l != S.boat) return;
+            if (i < L.m && a > 0) {
+              S.sel.push(i);
+              a--;
+            } else if (i >= L.m && b > 0) {
+              S.sel.push(i);
+              b--;
+            }
+          });
+          cross();
+        },
+        pause: () => {
+          if (!S || S.done || S.busy) return;
+          S.paused = 1;
+          modal(
+            '<h2>Paused</h2><p>The river will wait for you.</p><button class="btn" data-a="close">Resume</button>',
+          );
+        },
+      };
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-a]");
+        if (b && A[b.dataset.a]) A[b.dataset.a](b.dataset.v);
+      });
+      addEventListener("keydown", (e) => {
+        if (e.key == "Escape") return closeM();
+        if (
+          cur != "game" ||
+          $("#modal").classList.contains("on") ||
+          e.ctrlKey ||
+          e.metaKey
+        )
+          return;
+        ({ u: A.undo, r: A.restart, h: A.hint, p: A.pause, s: A.sol })[
+          e.key.toLowerCase()
+        ]?.();
+        if (e.key == "Enter" && e.target == document.body) cross();
+      });
+      setInterval(() => {
+        if (
+          cur == "game" &&
+          S &&
+          !S.paused &&
+          !S.done &&
+          !$("#modal").classList.contains("on")
+        ) {
+          S.el++;
+          $("#tm").textContent = tm();
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
