@@ -6,12 +6,6 @@ _A river-crossing puzzle adventure where every move matters._
 
 It sounds simple. The challenge is making every crossing count.
 
-<p align="center">
-  <a href="https://the-great-crossing.onrender.com">
-    <strong>Play The Great Crossing →</strong>
-  </a>
-</p>
-
 ---
 
 ## About the Game
@@ -124,11 +118,11 @@ The game is currently organised as a standalone HTML experience, with its implem
 
 The project is deployed and available to play online:
 
-**[https://the-great-crossing.onrender.com](https://the-great-crossing.onrender.com)**
-
-## Repository
-
-**GitHub:** [mehroofsaba/the-great-crossing](https://github.com/mehroofsaba/the-great-crossing)
+<p align="center">
+  <a href="https://the-great-crossing.onrender.com">
+    <strong>Play The Great Crossing</strong>
+  </a>
+</p>
 
 ---
 
