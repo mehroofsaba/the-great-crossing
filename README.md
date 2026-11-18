@@ -2,7 +2,7 @@
 
 _A river-crossing puzzle adventure where every move matters._
 
-**The Great Crossing** is a browser-based puzzle game inspired by the classic Missionaries and Cannibals problem. Your task is to guide six travellers — three missionaries and three cannibals — safely across a river using a small boat, while making sure that nobody is left in danger.
+**The Great Crossing** is a browser-based puzzle game inspired by the classic Missionaries and Cannibals problem. Your task is to guide six travellers — three missionaries and three cannibals - safely across a river using a small boat, while making sure that nobody is left in danger.
 
 It sounds simple. The challenge is making every crossing count.
 
@@ -31,11 +31,11 @@ Breaking the safety condition results in an invalid game state.
 ## Features
 
 - **Interactive River-Crossing Gameplay** — Move passengers between two riverbanks using the boat.
-- **Classic Puzzle Mechanics** — Experience the traditional Missionaries and Cannibals challenge.
-- **Rule Validation** — Keep track of passenger combinations and maintain safe conditions on both banks.
-- **Visual Game Environment** — A side-view river-crossing scene brings the puzzle to life.
-- **Standalone Browser Experience** — Play directly in a modern web browser without installing dependencies.
-- **Responsive Presentation** — Designed to be accessible through a browser on different screen sizes.
+- **Classic Puzzle Mechanics** - Experience the traditional Missionaries and Cannibals challenge.
+- **Rule Validation** - Keep track of passenger combinations and maintain safe conditions on both banks.
+- **Visual Game Environment** - A side-view river-crossing scene brings the puzzle to life.
+- **Standalone Browser Experience** - Play directly in a modern web browser without installing dependencies.
+- **Responsive Presentation** - Designed to be accessible through a browser on different screen sizes.
 
 ## Visual Direction
 
